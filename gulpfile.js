@@ -10,6 +10,8 @@ var build = path.resolve(process.cwd(), 'build');
 var uglify = require('gulp-uglify');
 var replace = require('gulp-replace');
 var wrapper = require('gulp-wrapper');
+var tap = require('gulp-tap');
+
 var date = new Date();
 var header = ['/*',
   'Copyright ' + date.getFullYear() + ', ' + packageInfo.name + '@' + packageInfo.version,
@@ -53,6 +55,32 @@ gulp.task('xtemplate', function () {
       .pipe(wrapper({
         header: header
       }))
+        .pipe(tap(function(file) {
+            //console.log(111, file);
+            var reg = /define\(("[^"]+",\s*\[[^\]]*\]),\s*function[^\{]+{/;
+            var contents = file.contents.toString();
+            var match = contents.match(reg)[1];
+            contents = contents.replace(reg,
+                        ';(function() {\n' +
+
+                            'if(window.KISSY){\n ' +
+                            'KISSY.add(' + match + ',function(S, require, exports, module){\n' +
+                            ' _xt(require, exports, module);\n' +
+                            '});\n ' +
+                            '} else if (window.define){\n ' +
+                            'define(' + match + ', _xt);\n' +
+                            '}else{\n' +
+                            'throw new Error("Can\'t found any module manager, such like Kissy CMD AMD SeaJS and etc.");\n' +
+                            '};\n' +
+                            'function _xt(require, exports, module) {')
+                        .replace(/}\);$/,
+                            '};\n' +
+                            '})();'
+                        );
+            //console.log(contents);
+            file.contents = new Buffer(contents);
+        }))
+
       .pipe(gulp.dest(build))
       .pipe(filter(debugJs))
       .pipe(replace(/@DEBUG@/g, ''))
