@@ -1,5 +1,5 @@
 {
-  "name": "xtemplate",
+  "name": "@ali/xtemplate",
   "version": "4.1.4",
   "author": "yiminghe <yiminghe@gmail.com>",
   "engines": {
@@ -58,5 +58,8 @@
     "test": "node --harmony ./node_modules/rc-server/node_modules/mocha/bin/mocha -R list tests/node/specs",
     "browser-test": "rc-tools run browser-test",
     "browser-test-cover": "rc-tools run browser-test-cover"
+  },
+  "publishConfig": {
+    "registry": "http://registry.npm.alibaba-inc.com"
   }
 }
