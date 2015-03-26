@@ -1,6 +1,6 @@
 {
   "name": "@ali/xtemplate",
-  "version": "4.1.4",
+  "version": "4.2.0",
   "author": "yiminghe <yiminghe@gmail.com>",
   "engines": {
     "node": ">=0.10"
