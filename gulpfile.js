@@ -184,3 +184,32 @@ gulp.task('parser-dev', function (callback) {
       }
     }).on('exit', callback);
 });
+
+gulp.task('kg', function () {
+  var fs = require('fs');
+  var kgInfo = JSON.parse(fs.readFileSync('./kg.log'));
+  var version = packageInfo.version;
+  var CombinedStream = require('combined-stream');
+  var stream = CombinedStream.create();
+  stream.append(gulp.src('./build/runtime-debug.js')
+    .pipe(rename('runtime.js'))
+    .pipe(replace('"xtemplate/' + version + '/runtime"', '"kg/xtemplate/' + version + '/runtime"'))
+    .pipe(gulp.dest(kgInfo.dest))
+    .pipe(replace(/@DEBUG@/g, ''))
+    .pipe(uglify())
+    .pipe(rename('runtime-min.js'))
+    .pipe(gulp.dest(kgInfo.dest))
+    .pipe(gulp.dest(kgInfo.dest)));
+  stream.append(gulp.src('./build/index-debug.js')
+    .pipe(rename('index.js'))
+    .pipe(replace('"xtemplate/' + version + '/index"', '"kg/xtemplate/' + version + '/index"'))
+    .pipe(replace('"xtemplate/' + version + '/runtime"', '"kg/xtemplate/' + version + '/runtime"'))
+    .pipe(gulp.dest(kgInfo.dest))
+    .pipe(replace(/@DEBUG@/g, ''))
+    .pipe(uglify())
+    .pipe(rename('index-min.js'))
+    .pipe(gulp.dest(kgInfo.dest))
+    .pipe(gulp.dest(kgInfo.dest)));
+  return stream;
+});
+
