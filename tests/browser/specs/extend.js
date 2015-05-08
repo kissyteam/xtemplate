@@ -125,10 +125,21 @@ describe('extend', function () {
   });
 
   it('error when dynamic parameter is empty', function () {
-    sub = '{{extend(base)}}{{#block("a")}}b{{/block}}';
+    var sub = '{{extend(base)}}{{#block("a")}}b{{/block}}';
     expect(function () {
       new XTemplate(sub).render({})
     }).to.throwException(/extend command required a non-empty parameter/);
+  });
+
+
+  it('static constraint when parameter is a static value', function () {
+    var baseTpl = uuid.v4();
+    var sub = '{{extend("'+baseTpl+'")}}';
+    var code = XTemplate.Compiler.compileToStr({
+      content: sub,
+      isModule: true
+    });
+    expect(code.indexOf('re'+'quire("'+baseTpl+'")')).not.to.equal(-1);
   });
 
 });

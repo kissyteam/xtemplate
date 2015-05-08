@@ -1,6 +1,6 @@
 {
-  "name": "@ali/xtemplate",
-  "version": "4.2.0",
+  "name": "kg-xtemplate",
+  "version": "4.2.1",
   "author": "yiminghe <yiminghe@gmail.com>",
   "engines": {
     "node": ">=0.10"
@@ -14,7 +14,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "http://github.com/xtemplate/xtemplate.git"
+    "url": "http://github.com/kissy/xtemplate.git"
   },
   "devDependencies": {
     "combined-stream": "0.0.5",
