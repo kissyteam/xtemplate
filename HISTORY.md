@@ -1,5 +1,25 @@
 # History
 ----
+## 4.3.0 (2015-05-19)
+
+`new` [#62](https://github.com/xtemplate/xtemplate/pull/67) support whitespace control
+`new` [#66](https://github.com/xtemplate/xtemplate/issues/66) add void command
+
+## 4.2.4 (2015-05-05)
+
+`improved` [#64](https://github.com/xtemplate/xtemplate/issues/64) reset global variable (lastLine)
+
+## 4.2.3 (2015-05-04)
+
+`improved` [#65](https://github.com/xtemplate/xtemplate/issues/65) resolve don't throw when value is null or undefined
+
+## 4.2.2 (2015-04-20)
+
+`improved` [#63](https://github.com/xtemplate/xtemplate/issues/63) fix call function when null or undefined
+
+## 4.2.1 (2015-04-08)
+
+`improved` [#60](https://github.com/xtemplate/xtemplate/issues/60) add build dir to npm
 
 ## 4.2.0 (2015-03-26)
 
