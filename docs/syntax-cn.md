@@ -145,7 +145,7 @@ b: 2
 用数据 `{name: "foo", array: [{name: "bar"}]}` 渲染下面的模板:
 
 ```
-{{#each(arr)}}
+{{#each(array)}}
 {{root.name}} {{name}}
 {{/each}}
 ```
